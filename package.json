@@ -6,6 +6,7 @@
   "private": false,
   "main": "lib/Lib.js",
   "module": "lib/Lib.js",
+  "homepage": "https://noodanee.com/markdown-lite/",
   "license": "GPL-3.0",
   "typings": "./lib/index.d.ts",
   "repository": {
