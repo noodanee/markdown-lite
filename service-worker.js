@@ -11,11 +11,11 @@
  * See https://goo.gl/2aRDsh
  */
 
-importScripts("/workbox-v3.6.3/workbox-sw.js");
-workbox.setConfig({modulePathPrefix: "/workbox-v3.6.3"});
+importScripts("/markdown-lite/workbox-v3.6.3/workbox-sw.js");
+workbox.setConfig({modulePathPrefix: "/markdown-lite/workbox-v3.6.3"});
 
 importScripts(
-  "/precache-manifest.69d591eb84dfe71269adb0f3544aafd4.js"
+  "/markdown-lite/precache-manifest.e4fcd7916636564b96d96526fd7f0ed5.js"
 );
 
 workbox.skipWaiting();
@@ -30,7 +30,7 @@ self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
-workbox.routing.registerNavigationRoute("/index.html", {
+workbox.routing.registerNavigationRoute("/markdown-lite/index.html", {
   
   blacklist: [/^\/_/,/\/[^/]+\.[^/]+$/],
 });
