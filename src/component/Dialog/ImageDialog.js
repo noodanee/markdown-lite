@@ -6,6 +6,7 @@ import SvgIcon from "../../icon";
 
 import AliOSS from "../ImageHosting/AliOSS";
 import QiniuOSS from "../ImageHosting/QiniuOSS";
+import TencentCOS from "../ImageHosting/TencentCOS";
 import Gitee from "../ImageHosting/Gitee";
 import GitHub from "../ImageHosting/GitHub";
 
@@ -75,6 +76,10 @@ class ImageDialog extends Component {
     // 使用七牛云图床
     else if (this.props.imageHosting.type === "七牛云") {
       uploadAdaptor({file, onSuccess, onError, onProgress, images});
+    } 
+    // 使用腾讯云图床
+    else if (this.props.imageHosting.type === "腾讯云") {
+      uploadAdaptor({file, onSuccess, onError, images});
     }
     // 使用SM.MS图床
     else if (this.props.imageHosting.type === "SM.MS") {
@@ -128,7 +133,7 @@ class ImageDialog extends Component {
         visible={this.props.dialog.isImageOpen}
         onOk={this.handleOk}
         onCancel={this.handleCancel}
-        bodyStyle={{paddingTop: "10px"}}
+        width={800}
       >
         <appContext.Consumer>
           {({useImageHosting}) => (
@@ -152,13 +157,18 @@ class ImageDialog extends Component {
                   <QiniuOSS />
                 </TabPane>
               ) : null}
+              {useImageHosting.isTencentOpen ? (
+                <TabPane tab={IMAGE_HOSTING_NAMES.tencent} key="4">
+                  <TencentCOS />
+                </TabPane>
+              ) : null}
               {useImageHosting.isGiteeOpen ? (
-                <TabPane tab={IMAGE_HOSTING_NAMES.gitee} key="4">
+                <TabPane tab={IMAGE_HOSTING_NAMES.gitee} key="5">
                   <Gitee />
                 </TabPane>
               ) : null}
               {useImageHosting.isGitHubOpen ? (
-                <TabPane tab={IMAGE_HOSTING_NAMES.github} key="5">
+                <TabPane tab={IMAGE_HOSTING_NAMES.github} key="6">
                   <GitHub />
                 </TabPane>
               ) : null}

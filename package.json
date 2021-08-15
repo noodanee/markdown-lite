@@ -14,14 +14,14 @@
     "url": "https://github.com/noodanee/markdown-lite"
   },
   "scripts": {
+    "dev": "nodemon scripts/start.js",
     "start": "node scripts/start.js",
     "watch": "node ./watch.js",
     "build": "node --max_old_space_size=4096 scripts/build.js",
     "test": "node scripts/test.js",
     "analyze": "source-map-explorer build/static/js/*.js",
     "lint": "eslint src --ext ts,tsx,js --fix",
-    "publish:npm": "cross-env NODE_ENV=production && rm -rf lib && mkdir lib && cross-env BABEL_ENV=production npx babel src --out-dir lib --copy-files",
-    "storybook": "npm run publish:npm && start-storybook -p 9001 -c .storybook"
+    "publish:npm": "cross-env NODE_ENV=production && rm -rf lib && mkdir lib && cross-env BABEL_ENV=production npx babel src --out-dir lib --copy-files"
   },
   "dependencies": {
     "@sitdown/juejin": "^1.1.1",
@@ -31,6 +31,7 @@
     "ali-oss": "^6.1.1",
     "antd": "^3.15.1",
     "axios": "^0.18.0",
+    "cos-js-sdk-v5": "^1.2.16",
     "diff-match-patch": "^1.0.4",
     "highlight.js": "^9.15.6",
     "juice": "^5.2.0",
@@ -57,7 +58,6 @@
   "devDependencies": {
     "@babel/cli": "^7.6.2",
     "@babel/core": "7.2.2",
-    "@storybook/react": "^4.1.11",
     "@svgr/webpack": "^4.1.0",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "^9.0.0",
@@ -97,6 +97,7 @@
     "jest-watch-typeahead": "^0.2.1",
     "lint-staged": "^9.4.0",
     "mini-css-extract-plugin": "0.5.0",
+    "nodemon": "^2.0.12",
     "optimize-css-assets-webpack-plugin": "5.0.1",
     "pnp-webpack-plugin": "1.2.1",
     "postcss-flexbugs-fixes": "4.1.0",

@@ -5,6 +5,7 @@ import * as qiniu from "qiniu-js";
 import {message} from "antd";
 import axios from "axios";
 import OSS from "ali-oss";
+import COS from "cos-js-sdk-v5";
 import imageHosting from "../store/imageHosting";
 
 import {
@@ -16,7 +17,8 @@ import {
   IMAGE_HOSTING_TYPE,
   IS_CONTAIN_IMG_NAME,
   IMAGE_HOSTING_NAMES,
-  QINIUOSS_IMAGE_DEFAULT_HOST
+  QINIUOSS_IMAGE_DEFAULT_HOST,
+  TENGCENTCOS_IMAGE_HOSTING
 } from "./constant";
 import {toBlob, getOSSName} from "./helper";
 
@@ -152,6 +154,63 @@ export const qiniuOSSUpload = async ({
     onError(err, err.toString());
   }
 };
+
+export const tencentCOSUpload = async ({
+  file = {},
+  onSuccess = () => {},
+  onError = () => {},
+  images = [],
+  content = null, // store content
+}) => {
+  showUploadNoti();
+  const config = JSON.parse(window.localStorage.getItem(TENGCENTCOS_IMAGE_HOSTING));
+  try {
+    let {domain} = config;
+    const {namespace} = config;
+    // domain可能配置时末尾没有加‘/’
+    if (domain[domain.length - 1] !== "/") {
+      domain += "/";
+    }
+    const cos = new COS({
+      SecretId: secretId,
+      SecretKey: secretKey,
+    });
+    cos.putObject(
+      {
+        Bucket: bucket,
+        Region: region,
+        Key: `${namespace}/${file.name}`,
+        Body: file,
+      },
+      function (err, data) {
+        let url = null;
+        if (err) {
+          return onError(err);
+        } else if (domain) {
+          url = path == "" ? `${domain}/${file.name}` : `${domain}/${namespace}/${file.name}`
+        } else {
+          url = `https://${data.Location}`;
+        }
+        const image = {
+          filename: file.name,
+          url: url,
+        };
+        if (content) {
+          writeToEditor({content, image});
+        }
+        images.push(image);
+        onSuccess(data, file);
+        setTimeout(() => {
+          hideUploadNoti();
+        }, 500);
+      }
+    );
+  } catch (err) {
+    hideUploadNoti();
+    uploadError(error.toString());
+    onError(error, error.toString());
+  }
+}
 
 // 用户自定义的图床上传
 export const customImageUpload = async ({
@@ -514,6 +573,18 @@ export const uploadAdaptor = (...args) => {
       return false;
     }
     return aliOSSUpload(...args);
+  } else if (type === IMAGE_HOSTING_NAMES.tencent) {
+    const config = JSON.parse(window.localStorage.getItem(TENGCENTCOS_IMAGE_HOSTING));
+    if (
+      !config.region.length ||
+      !config.secretId.length ||
+      !config.secretKey.length ||
+      !config.bucket.length
+    ) {
+      message.error("请先配置腾讯云图床");
+      return false;
+    }
+    return tencentCOSUpload(...args);
   } else if (type === IMAGE_HOSTING_NAMES.gitee) {
     const config = JSON.parse(window.localStorage.getItem(GITEE_IMAGE_HOSTING));
     if (!config.username.length || !config.repo.length || !config.token.length) {

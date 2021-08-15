@@ -33,6 +33,7 @@ export const ALIOSS_IMAGE_HOSTING = "alioss_image_hosting";
 export const GITEE_IMAGE_HOSTING = "gitee_image_hosting";
 export const GITHUB_IMAGE_HOSTING = "github_image_hosting";
 export const QINIUOSS_IMAGE_HOSTING = "qiniuoss_image_hosting";
+export const TENGCENTCOS_IMAGE_HOSTING = "tencentcos_image_hosting";
 export const IMAGE_HOSTING_TYPE = "image_hosting_type";
 export const BASIC_THEME_ID = "basic-theme";
 export const CODE_THEME_ID = "code-theme";
@@ -44,6 +45,7 @@ export const IMAGE_HOSTING_NAMES = {
   smms: "SM.MS",
   aliyun: "阿里云",
   qiniuyun: "七牛云",
+  tencent: "腾讯云",
   gitee: "Gitee",
   github: "GitHub",
 };

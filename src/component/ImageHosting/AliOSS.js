@@ -57,20 +57,16 @@ class AliOSS extends Component {
     return (
       <Form {...formItemLayout}>
         <Form.Item label="Bucket" style={style.formItem}>
-          <Input value={bucket} onChange={this.bucketChange} placeholder="例如：my-wechat" />
+          <Input value={bucket} onChange={this.bucketChange} placeholder="Bucket" />
         </Form.Item>
         <Form.Item label="Region" style={style.formItem}>
-          <Input value={region} onChange={this.regionChange} placeholder="例如：oss-cn-hangzhou" />
+          <Input value={region} onChange={this.regionChange} placeholder="Region" />
         </Form.Item>
         <Form.Item label="AccessKey ID" style={style.formItem}>
-          <Input value={accessKeyId} onChange={this.accessKeyIdChange} placeholder="例如：qweASDF1234zxcvb" />
+          <Input value={accessKeyId} onChange={this.accessKeyIdChange} placeholder="AccessKey ID" />
         </Form.Item>
         <Form.Item label="AccessKey Secret" style={style.formItem}>
-          <Input
-            value={accessKeySecret}
-            onChange={this.accessKeySecretChange}
-            placeholder="例如：qweASDF1234zxcvbqweASD"
-          />
+          <Input value={accessKeySecret} onChange={this.accessKeySecretChange} placeholder="AccessKey Secret" />
         </Form.Item>
         <Form.Item label="提示" style={style.formItem}>
           <span>配置后请在右上角进行切换，</span>

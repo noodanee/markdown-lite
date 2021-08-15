@@ -156,21 +156,6 @@ export const dateFormat = (date, fmt) => {
   return fmt;
 };
 
-// export const url2Blob = (imgUrl) => {
-//   window.URL = window.URL || window.webkitURL;
-//   var xhr = new XMLHttpRequest();
-//   xhr.open("get", imgUrl, true);
-//   xhr.responseType = "blob";
-//   xhr.onload = function () {
-//     if (this.status == 200) {
-//       //得到一个blob对象
-//       var blob = this.response;
-//       console.log("blob", blob)
-//     }
-//   }
-//   xhr.send();
-// }
-
 function getBase64Image(img) {
   var canvas = document.createElement("canvas");
   canvas.width = img.width;

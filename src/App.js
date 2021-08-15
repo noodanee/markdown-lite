@@ -111,7 +111,7 @@ class App extends Component {
     if (this.props.useImageHosting === undefined) {
       return;
     }
-    const {url, name, isSmmsOpen, isQiniuyunOpen, isAliyunOpen, isGiteeOpen, isGitHubOpen} = this.props.useImageHosting;
+    const {url, name, isSmmsOpen, isQiniuyunOpen, isTencentOpen, isAliyunOpen, isGiteeOpen, isGitHubOpen} = this.props.useImageHosting;
     if (name) {
       this.props.imageHosting.setHostingUrl(url);
       this.props.imageHosting.setHostingName(name);
@@ -125,6 +125,9 @@ class App extends Component {
     }
     if (isQiniuyunOpen) {
       this.props.imageHosting.addImageHosting(IMAGE_HOSTING_NAMES.qiniuyun);
+    }
+    if (isTencentOpen) {
+      this.props.imageHosting.addImageHosting(IMAGE_HOSTING_NAMES.tencent);
     }
     if (isGiteeOpen) {
       this.props.imageHosting.addImageHosting(IMAGE_HOSTING_NAMES.gitee);
@@ -144,6 +147,8 @@ class App extends Component {
         type = IMAGE_HOSTING_NAMES.aliyun;
       } else if (isQiniuyunOpen) {
         type = IMAGE_HOSTING_NAMES.qiniuyun;
+      } else if (isTencentOpen) {
+        type = IMAGE_HOSTING_NAMES.tencent;
       } else if (isGiteeOpen) {
         type = IMAGE_HOSTING_NAMES.isGitee;
       }
@@ -379,8 +384,8 @@ class App extends Component {
                 >
                   <section
                     id={LAYOUT_ID}
-                    data-tool="markdown编辑器"
-                    data-website="https://www.noodanee.com"
+                    data-tool="markdown-lite"
+                    data-website="https://www.noodanee.com/markdown-lite/"
                     dangerouslySetInnerHTML={{
                       __html: parseHtml,
                     }}

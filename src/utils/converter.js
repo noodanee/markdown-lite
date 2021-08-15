@@ -96,7 +96,7 @@ export const solveHtml = () => {
 
   const inner = element.children[0].children;
   for (const item of inner) {
-    item.setAttribute("data-tool", "markdown编辑器");
+    item.setAttribute("data-tool", "markdown-lite");
   }
   let html = element.innerHTML;
   html = html.replace(/<mjx-container (class="inline.+?)<\/mjx-container>/g, "<span $1</span>");

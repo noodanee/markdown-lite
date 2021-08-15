@@ -3,6 +3,7 @@ import {
   IMAGE_HOSTING_TYPE,
   ALIOSS_IMAGE_HOSTING,
   QINIUOSS_IMAGE_HOSTING,
+  TENGCENTCOS_IMAGE_HOSTING,
   GITEE_IMAGE_HOSTING,
   GITHUB_IMAGE_HOSTING,
 } from "../utils/constant";
@@ -42,7 +43,7 @@ class ImageHosting {
 
 const store = new ImageHosting();
 
-// 如果为空先把数据放进去
+// AliOSS 如果为空先把数据放进去
 if (!window.localStorage.getItem(ALIOSS_IMAGE_HOSTING)) {
   const alioss = JSON.stringify({
     region: "",
@@ -53,20 +54,33 @@ if (!window.localStorage.getItem(ALIOSS_IMAGE_HOSTING)) {
   window.localStorage.setItem(ALIOSS_IMAGE_HOSTING, alioss);
 }
 
-// 如果为空先把数据放进去
+// QiniuOSS 如果为空先把数据放进去
 if (!window.localStorage.getItem(QINIUOSS_IMAGE_HOSTING)) {
   const qiniuoss = JSON.stringify({
     region: "",
     accessKey: "",
     secretKey: "",
     bucket: "",
-    domain: "https://",
+    domain: "",
     namespace: "",
   });
   window.localStorage.setItem(QINIUOSS_IMAGE_HOSTING, qiniuoss);
 }
 
-// 如果为空先把数据放进去
+// QiniuOSS 如果为空先把数据放进去
+if (!window.localStorage.getItem(TENGCENTCOS_IMAGE_HOSTING)) {
+  const tencentcos = JSON.stringify({
+    region: "",
+    secretId: "",
+    secretKey: "",
+    bucket: "",
+    domain: "",
+    namespace: "",
+  });
+  window.localStorage.setItem(TENGCENTCOS_IMAGE_HOSTING, tencentcos);
+}
+
+// Gitee 如果为空先把数据放进去
 if (!window.localStorage.getItem(GITEE_IMAGE_HOSTING)) {
   const gitee = JSON.stringify({
     username: "",
@@ -76,7 +90,7 @@ if (!window.localStorage.getItem(GITEE_IMAGE_HOSTING)) {
   window.localStorage.setItem(GITEE_IMAGE_HOSTING, gitee);
 }
 
-// 如果为空先把数据放进去
+// Github 如果为空先把数据放进去
 if (!window.localStorage.getItem(GITHUB_IMAGE_HOSTING)) {
   const github = JSON.stringify({
     username: "",
