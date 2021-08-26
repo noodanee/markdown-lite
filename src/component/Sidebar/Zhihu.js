@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import {observer, inject} from "mobx-react";
 import {message, Tooltip} from "antd";
 
-import {solveHtml, solveZhihuMath, copySafari} from "../../utils/converter";
+import {solveHtml, solveZhihuMath, solveZhihuTable, copySafari} from "../../utils/converter";
 import {LAYOUT_ID, ENTER_DELAY, LEAVE_DELAY} from "../../utils/constant";
 import SvgIcon from "../../icon";
 import "./Zhihu.css";
@@ -23,6 +23,7 @@ class Zhihu extends Component {
     const html = layout.innerHTML;
     solveZhihuMath();
     this.html = solveHtml();
+    this.html = solveZhihuTable(this.html);
     copySafari(this.html);
     message.success("已复制，请到知乎粘贴");
     layout.innerHTML = html; // 恢复现场

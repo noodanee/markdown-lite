@@ -91,6 +91,13 @@ export const solveJuejinCode = (html) => {
   return html;
 };
 
+// 修复知乎表格只显示表头的问题
+export const solveZhihuTable = (html) => {
+  html = html.replace(/<thead[^>]*>([\s\S]*)<\/thead>/g, "$1")
+  html = html.replace(/<tbody[^>]*>([\s\S]*)<\/tbody>/, "$1")
+  return html;
+};
+
 export const solveHtml = () => {
   const element = document.getElementById(BOX_ID);
 
