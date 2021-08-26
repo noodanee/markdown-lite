@@ -15,7 +15,7 @@ importScripts("/markdown-lite/workbox-v3.6.3/workbox-sw.js");
 workbox.setConfig({modulePathPrefix: "/markdown-lite/workbox-v3.6.3"});
 
 importScripts(
-  "/markdown-lite/precache-manifest.349c5341d63115a09d1e6cafc64a4658.js"
+  "/markdown-lite/precache-manifest.ecb161052426c55f23e48b3fbc2a4a1d.js"
 );
 
 workbox.skipWaiting();
